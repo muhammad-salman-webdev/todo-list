@@ -23,59 +23,22 @@
 
         <!-- List Container  -->
         <div class="list-container">
-          <div class="searchbar-box">
+          <form action="index.php" class="searchbar-box" id="todo-form">
             <input
               type="text"
               class="search-bar"
-              placeholder="Add Your new todo" />
-
+              placeholder="Add Your new todo"
+              title="Input Required"
+              required />
             <!-- List Button -->
-            <button>
+            <button type="submit">
               <i class="fa-solid fa-plus"></i>
             </button>
-          </div>
+          </form>
 
           <!-- List items  -->
-          <div class="list-items">
-            <div class="item-box">
-              <p> Buy a new gaming laptop </p>
-              <div class="options">
-                <div class="option">
-                  <i class="fas fa-pen"></i>
-                </div>
-                <div class="option">
-                  <i class="fa-solid fa-trash"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="item-box">
-              <p> Complete a previous task </p>
-              <div class="options">
-                <div class="option">
-                  <i class="fas fa-pen"></i>
-                </div>
-
-                <div class="option">
-                  <i class="fa-solid fa-trash"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="item-box">
-              <p> Create video for Youtube </p>
-              <div class="options">
-                <div class="option">
-                  <i class="fas fa-pen"></i>
-                </div>
-
-                <div class="option">
-                  <i class="fa-solid fa-trash"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="item-box">
+          <div class="list-items" id="tasks-list">
+            <!-- <div class="item-box">
               <p> Create a new portfolio site </p>
               <div class="options">
                 <div class="option">
@@ -86,17 +49,17 @@
                   <i class="fa-solid fa-trash"></i>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <!-- Tasks Section  -->
           <div class="footer-section">
-            <div class="tasks"> You have 4 pending tasks </div>
-
+            <div class="tasks"> You have 0 pending tasks </div>
             <button> Clear All </button>
           </div>
         </div>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
