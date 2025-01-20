@@ -27,6 +27,10 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-height: 30vh;
+    overflow: auto;
+    padding: 0 10px;
+    overflow: auto;
 }
 
 .item-box {
