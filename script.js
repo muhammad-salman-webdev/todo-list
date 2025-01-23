@@ -1,32 +1,71 @@
-const form = document.getElementById("todo-form");
-const tasks = document.getElementById("tasks-list");
+// const todoForm = document.getElementById("todo-form");
+// const taskList = document.getElementById("tasks-list");
 
-let counter = 0;
+// let count = 0;
+// todoForm.addEventListener("submit", (_form) => {
+//   _form.preventDefault();
+//   const task = _form.target[0].value;
 
-form.addEventListener("submit", (_form) => {
-  // Prevent the form to submit
+//   count++;
+
+//   const newTask = `<div class="item-box">
+//  <strong>${count}</strong>
+//             <p> ${task} </p>
+//             <div class="options">
+//               <div class="option edit-option">
+//                 <i class="fas fa-pen"></i>
+//               </div>
+
+//               <div class="option delete-option">
+//                 <i class="fa-solid fa-trash"></i>
+//               </div>
+//             </div>
+//           </div>`;
+
+//   taskList.innerHTML += newTask;
+//   _form.target[0].value = "";
+
+//   addCrudOptions();
+// });
+
+// //
+
+// function addCrudOptions() {
+//   const tasks = taskList.querySelectorAll("div.item-box");
+//   console.log("___________________________________");
+
+//   tasks.forEach((task, index) => {
+//     const EditBtn = task.querySelector(".options > .option.edit-option");
+//     const deleteBtn = task.querySelector(".options > .option.delete-option");
+
+//     EditBtn.addEventListener("click" , () => {
+
+//     })
+//   });
+// }
+
+const todoForm = document.getElementById("todo-form");
+const taskList = document.getElementById("tasks-list");
+let count = 0;
+todoForm.addEventListener("submit", (_form) => {
   _form.preventDefault();
-
-  // Get the task
   const task = _form.target[0].value;
-  console.log(task);
-  counter++;
-  // Add the Value into the DOM
-  const newTask = `
-        <div class="item-box">
-        <strong> ${counter} </strong>
-          <p> ${task} </p>
-          <div class="options">
-            <div class="option">
-              <i class="fas fa-pen"></i>
-            </div>
+  count++;
 
-            <div class="option">
-              <i class="fa-solid fa-trash"></i>
-            </div>
-          </div>
-        </div>
-        `;
-  tasks.innerHTML += newTask;
+  const newTask = `<div class="item-box">
+  <strong>${count}</strong>
+              <p>${task} </p>
+              <div class="options">
+                <div class="option">
+                  <i class="fas fa-pen"></i>
+                </div>
+
+                <div class="option">
+                  <i class="fa-solid fa-trash"></i>
+                </div>
+              </div>
+            </div>`;
+
+  taskList.innerHTML += newTask;
   _form.target[0].value = "";
 });

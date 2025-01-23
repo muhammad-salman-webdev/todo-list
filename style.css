@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", serif;
+    text-transform: capitalize;
 }
 
 .container {
@@ -27,10 +28,10 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    overflow: auto;
     max-height: 30vh;
-    overflow: auto;
-    padding: 0 10px;
-    overflow: auto;
+    padding: 10px;
+    margin: -10px 0 -20px;
 }
 
 .item-box {
@@ -54,6 +55,14 @@
                 opacity: 1;
             }
         }
+    }
+
+    &>strong {
+        width: 6%;
+    }
+
+    &>p {
+        flex-grow: 1;
     }
 
     .options {
