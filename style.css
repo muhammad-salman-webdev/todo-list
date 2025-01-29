@@ -51,7 +51,7 @@
 
         .options {
             .option {
-                transform: translate(0) !important;
+                transform: scale(1) !important;
                 opacity: 1;
             }
         }
@@ -80,7 +80,7 @@
             border-radius: 4px;
             cursor: pointer;
             transition: all .3s ease;
-            transform: translateY(20px);
+            transform: scale(.5);
             opacity: 0;
 
             i {
@@ -93,7 +93,6 @@
 
             &:nth-child(2) {
                 background: #429a22;
-                transform: translateY(-20px);
             }
         }
     }
@@ -103,6 +102,18 @@
     display: flex;
     align-items: center;
     gap: 6px;
+
+    &.isEditing {
+        button {
+            i.fa-pencil {
+                display: block;
+            }
+
+            i.fa-plus {
+                display: none;
+            }
+        }
+    }
 
     button {
         background: #8e4ae6;
@@ -114,6 +125,10 @@
         i {
             color: white;
             font-size: 23px;
+
+            &.fa-pencil {
+                display: none;
+            }
         }
     }
 }
