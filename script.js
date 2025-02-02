@@ -1,85 +1,73 @@
-// Get the form element for the task input and the task list container
 const todoForm = document.getElementById("todo-form");
 const taskList = document.getElementById("tasks-list");
-let count = 0; // Initialize task count to keep track of task numbers
+const input = todoForm.querySelector("input");
+const totalTasksLabel = document.querySelector(".footer-section .tasks span");
 
+let count = 0;
+let editingItemIndex = 0;
 let isEditing = false;
 
-let editingItemIndex = 0;
-
-// Add an event listener to handle form submission
 todoForm.addEventListener("submit", (_form) => {
-  _form.preventDefault(); // Prevent default form submission behavior
-  const task = _form.target[0].value; // Get the task input value from the form
+  _form.preventDefault();
 
-  if (isEditing === true) {
-    // edit the item
+  const task = input.value;
+  count++;
+  if (isEditing) {
     const allItem = taskList.querySelectorAll(".item-box");
     allItem[editingItemIndex].querySelector("p").innerText = task;
-
-    isEditing = false;
     todoForm.classList.remove("isEditing");
+    isEditing = false;
   } else {
-    count++; // Increment the task count for task numbering
-
-    // Create the task item markup with the task number, task text, and options (edit/delete)
     const newTask = `<div class="item-box">
-  <strong>${count}</strong>  <!-- Task number -->
-              <p> ${task} </p>  <!-- Task description -->
-              <div class="options">
-                <div class="option edit-option">
-                  <i class="fas fa-pen"></i> <!-- Edit icon -->
-                </div>
- 
-                <div class="option delete-option">
-                  <i class="fa-solid fa-trash"></i> <!-- Delete icon -->
-                </div>
-              </div>
-            </div>`;
+      <strong>${count}</strong>
+      <p>${task}</p>
+      <div class="options">
+        <div class="option edit-button">
+          <i class="fas fa-pen"></i>
+        </div>
 
-    // Append the new task to the task list
+        <div class="option delete-button">
+          <i class="fa-solid fa-trash"></i>
+        </div>
+      </div>
+    </div>`;
     taskList.innerHTML += newTask;
-
-    // Call the function to attach CRUD event listeners to task options
-    addCrudOptions();
+    addCrudOption();
+    totalTasksLabel.innerText = count;
   }
 
-  // Clear the input field for the next task
-  _form.target[0].value = "";
+  input.value = "";
 });
 
-// Function to add event listeners for edit and delete options
-function addCrudOptions() {
-  // Select all task items
-  const taskItem = taskList.querySelectorAll("div.item-box");
+function addCrudOption() {
+  const taskItems = taskList.querySelectorAll(".item-box");
+  taskItems.forEach((task, index) => {
+    const editButton = task.querySelector(".options .option.edit-button");
 
-  // Loop through each task item to attach events
-  taskItem.forEach((task, index) => {
-    const editButton = task.querySelector(".options > .option.edit-option"); // Edit button
-    const deleteButton = task.querySelector(".options > .option.delete-option"); // Delete button
-
-    // Handle the edit functionality when the edit button is clicked
     editButton.addEventListener("click", () => {
-      console.log(index, "this should be Edited"); // Placeholder for edit logic
-
-      const input = todoForm.querySelector("input");
-      input.value = task.querySelector("p").textContent;
-      input.focus();
-      isEditing = true;
       editingItemIndex = index;
+      isEditing = true;
+      input.value = task.querySelector("p").innerText;
+      input.focus();
       todoForm.classList.add("isEditing");
     });
 
-    // Handle the delete functionality when the delete button is clicked
+    const deleteButton = task.querySelector(".options .option.delete-button");
     deleteButton.addEventListener("click", () => {
-      taskItem[index].remove(); // Remove the selected task item
+      taskItems[index].remove();
 
-      // Update the task numbers after deletion
-      const upDatedTask = taskList.querySelectorAll("div.item-box");
+      const upDatedTask = taskList.querySelectorAll(".item-box");
 
       upDatedTask.forEach((_task, _index) => {
-        _task.querySelector("strong").innerText = _index + 1; // Update task numbering
+        _task.querySelector("strong").innerText = _index + 1;
+        count = _index + 1;
+        // updateTotalTasksLabel();
+        totalTasksLabel.innerText = count;
       });
     });
   });
 }
+
+// function updateTotalTasksLabel() {
+//   totalTasksLabel.innerText = count;
+// }
