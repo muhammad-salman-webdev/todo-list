@@ -14,7 +14,12 @@ todoForm.addEventListener("submit", (_form) => {
   count++;
   if (isEditing) {
     const allItem = taskList.querySelectorAll(".item-box");
-    allItem[editingItemIndex].querySelector("p").innerText = task;
+    if (allItem[editingItemIndex]) {
+      allItem[editingItemIndex].querySelector("p").innerText = task;
+      showNotification("edited");
+    } else {
+      showNotification("error");
+    }
     todoForm.classList.remove("isEditing");
     isEditing = false;
   } else {
@@ -33,7 +38,9 @@ todoForm.addEventListener("submit", (_form) => {
     </div>`;
     taskList.innerHTML += newTask;
     addCrudOption();
-    totalTasksLabel.innerText = count;
+    updateTotalTasksLabel();
+    showNotification("added");
+    // totalTasksLabel.innerText = count;
   }
 
   input.value = "";
@@ -55,19 +62,35 @@ function addCrudOption() {
     const deleteButton = task.querySelector(".options .option.delete-button");
     deleteButton.addEventListener("click", () => {
       taskItems[index].remove();
+      showNotification("deleted");
 
       const upDatedTask = taskList.querySelectorAll(".item-box");
 
-      upDatedTask.forEach((_task, _index) => {
-        _task.querySelector("strong").innerText = _index + 1;
-        count = _index + 1;
-        // updateTotalTasksLabel();
-        totalTasksLabel.innerText = count;
-      });
+      if (upDatedTask.length > 0) {
+        upDatedTask.forEach((_task, _index) => {
+          _task.querySelector("strong").innerText = _index + 1;
+          count = _index + 1;
+          updateTotalTasksLabel();
+        });
+      } else {
+        count = 0;
+      }
     });
   });
 }
 
-// function updateTotalTasksLabel() {
-//   totalTasksLabel.innerText = count;
-// }
+function updateTotalTasksLabel() {
+  totalTasksLabel.innerText = count;
+}
+
+const clearAllButton = document.querySelector(".footer-section button");
+
+clearAllButton.addEventListener("click", () => {
+  taskList.innerHTML = ""; // Remove all task items
+  count = 0;
+  updateTotalTasksLabel();
+});
+
+function showNotification(type) {
+  console.log(type);
+}
