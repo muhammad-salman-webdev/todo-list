@@ -39,7 +39,7 @@ todoForm.addEventListener("submit", (_form) => {
     taskList.innerHTML += newTask;
     addCrudOption();
     updateTotalTasksLabel();
-    showNotification("added");
+
     // totalTasksLabel.innerText = count;
   }
 

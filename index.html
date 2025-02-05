@@ -10,12 +10,76 @@
     <!-- Link Style CSS  -->
     <link rel="stylesheet" href="style.css" />
 
+    <!-- CDN Link Font Awesome  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
   </head>
   <body>
     <div class="container">
+      <!-- Notification Container  -->
+      <div class="notifcation-container">
+        <!-- Notification List  -->
+        <div class="notification-list">
+          <!-- Notification Item  -->
+          <div class="notification-item" id="red" style="display: none">
+            <!-- Icon  -->
+            <div class="icon">
+              <i class="fa-regular fa-x"></i>
+            </div>
+
+            <div class="notification-content">
+              <h3>Error</h3>
+              <span>Chang a few thing up and try sumitting again.</span>
+            </div>
+
+            <label>
+              <i class="fa-regular fa-x"></i>
+
+              <input type="checkbox" />
+            </label>
+          </div>
+          <!-- Notification Item  -->
+          <div class="notification-item blue" id="blue">
+            <!-- Icon  -->
+            <div class="icon">
+              <i class="fa-solid fa-question"></i>
+            </div>
+
+            <div class="notification-content">
+              <h3>Help!</h3>
+
+              <span>Do you have a problem? just use this </span>
+            </div>
+
+            <label>
+              <i class="fa-regular fa-x"></i>
+              <input type="checkbox" />
+            </label>
+          </div>
+          <!-- Notification Item  -->
+          <div class="notification-item green" id="green">
+            <!-- Icon  -->
+            <div class="icon">
+              <i class="fa-solid fa-exclamation"></i>
+            </div>
+
+            <div class="notification-content">
+              <h3>Success!</h3>
+
+              <span>Your message has been sent successfully</span>
+            </div>
+
+            <label>
+              <i class="fa-regular fa-x"></i>
+              <input type="checkbox" />
+            </label>
+          </div>
+        </div>
+      </div>
       <!-- Todo Container  -->
       <div class="todo-container">
         <!-- Todo Head  -->
