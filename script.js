@@ -3,6 +3,8 @@ const taskList = document.getElementById("tasks-list");
 const input = todoForm.querySelector("input");
 const totalTasksLabel = document.querySelector(".footer-section .tasks span");
 
+const notificationElem = document.getElementById("notificationList");
+
 let count = 0;
 let editingItemIndex = 0;
 let isEditing = false;
@@ -39,8 +41,7 @@ todoForm.addEventListener("submit", (_form) => {
     taskList.innerHTML += newTask;
     addCrudOption();
     updateTotalTasksLabel();
-
-    // totalTasksLabel.innerText = count;
+    showNotification("added");
   }
 
   input.value = "";
@@ -92,5 +93,49 @@ clearAllButton.addEventListener("click", () => {
 });
 
 function showNotification(type) {
-  console.log(type);
+  let notiClass = "";
+  let notiIcon = "";
+  let notiTitle = "";
+  let notiText = "";
+  // Green
+  if (type === "added") {
+    notiClass = "green";
+    notiIcon = "check";
+    notiTitle = "Added";
+    notiText = "List Item Added!";
+  }
+  // Blue
+  else if (type === "edited") {
+    notiClass = "blue";
+    notiText = "List Item Edited!";
+  }
+  // Red
+  else if (type === "deleted") {
+    notiClass = "red";
+    notiText = "List Item Deleted!";
+  }
+  // Yellow
+  else if (type === "error") {
+    notiClass = "yellow";
+    notiText = "Something Happened Wrong!";
+  }
+
+  const newNoti = `
+            <div class="notification-item ${notiClass}">
+              <div class="icon">
+                <i class="fa-solid fa-check"></i>
+              </div>
+
+              <div class="notification-content">
+                <h3>Added</h3>
+
+                <span>${notiText}</span>
+              </div>
+              <div class="close-icon">
+                <i class="fa-regular fa-xmark"></i>
+              </div>
+            </div>
+  `;
+
+  notificationElem.innerHTML += newNoti;
 }
