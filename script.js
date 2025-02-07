@@ -9,6 +9,8 @@ let count = 0;
 let editingItemIndex = 0;
 let isEditing = false;
 
+let notiCount = 0;
+
 todoForm.addEventListener("submit", (_form) => {
   _form.preventDefault();
 
@@ -97,45 +99,110 @@ function showNotification(type) {
   let notiIcon = "";
   let notiTitle = "";
   let notiText = "";
-  // Green
+
   if (type === "added") {
     notiClass = "green";
-    notiIcon = "check";
+    notiIcon = "fa-solid fa-check";
     notiTitle = "Added";
     notiText = "List Item Added!";
-  }
-  // Blue
-  else if (type === "edited") {
+  } else if (type === "edited") {
     notiClass = "blue";
+    notiTitle = "Edited";
     notiText = "List Item Edited!";
-  }
-  // Red
-  else if (type === "deleted") {
+  } else if (type === "deleted") {
     notiClass = "red";
+    notiTitle = "Deleted";
     notiText = "List Item Deleted!";
-  }
-  // Yellow
-  else if (type === "error") {
+  } else if (type === "error") {
     notiClass = "yellow";
+    notiTitle = "Error";
     notiText = "Something Happened Wrong!";
   }
 
-  const newNoti = `
-            <div class="notification-item ${notiClass}">
-              <div class="icon">
-                <i class="fa-solid fa-check"></i>
-              </div>
+  notiCount++;
+  // const newNoti = `
+  //   <div class="notification-item ${notiClass} notification-no-${notiCount}">
+  //     <div class="icon">
+  //       <i class="fa-solid fa-check"></i>
+  //     </div>
 
-              <div class="notification-content">
-                <h3>Added</h3>
+  //     <div class="notification-content">
+  //       <h3>${notiTitle}</h3>
+  //       <span>${notiText}</span>
+  //     </div>
 
-                <span>${notiText}</span>
-              </div>
-              <div class="close-icon">
-                <i class="fa-regular fa-xmark"></i>
-              </div>
-            </div>
-  `;
+  //     <div class="close-icon">
+  //       <i class="fa-regular fa-xmark"></i>
+  //     </div>
+  //   </div>
+  // `;
 
-  notificationElem.innerHTML += newNoti;
+  // Noitication Item
+  const _notiItem = document.createElement("div");
+  _notiItem.classList.add(
+    "notification-item",
+    notiClass,
+    `notification-no-${notiCount}`
+  );
+
+  // Icon
+  const _notiIcon = document.createElement("div");
+  _notiIcon.classList.add("icon");
+
+  const _icon = document.createElement("i");
+  _icon.classList.add("fa-solid", "fa-check");
+
+  _notiIcon.appendChild(_icon);
+  // Icon
+
+  // Content
+  const _content = document.createElement("div");
+  _content.classList.add("notification-content");
+
+  const _h3 = document.createElement("h3");
+  _h3.textContent = notiTitle;
+
+  const _span = document.createElement("span");
+  _span.textContent = notiText;
+
+  _content.append(_h3, _span);
+
+  // Content
+
+  // close Icon
+  const _closeIcon = document.createElement("div");
+  _closeIcon.classList.add("close-icon");
+
+  const _icon2 = document.createElement("i");
+  _icon2.classList.add("fa-regular", "fa-xmark");
+
+  _closeIcon.appendChild(_icon2);
+
+  // close Icon
+
+  // Adding
+  _notiItem.append(_notiIcon, _content, _closeIcon);
+
+  console.log(_notiItem);
+  // Adding
+
+  // notificationElem.innerHTML += newNoti;
+  notificationElem.appendChild(_notiItem);
+
+  // const notificationXmark = document.querySelectorAll(".close-icon .fa-xmark");
+  // notificationXmark.forEach((value, index) => {
+  //   value.addEventListener("click", () => {
+  //     notificationXmark[index].closest(".notification-item").remove(); // Sirf target notification remove hogi
+  //   });
+  // });
+
+  const _noti = document.querySelector(`.notification-no-${notiCount}`);
+
+  _noti.querySelector(".close-icon i").addEventListener("click", () => {
+    _noti.remove();
+  });
+
+  setTimeout(() => {
+    _noti.remove();
+  }, 2500);
 }
